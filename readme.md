@@ -15,4 +15,15 @@ This will start a graphql server on  `http://localhost:8981/`
 
 ## Frontend Client
 
-Coming soon
+Web client that connects to the backend to enable changing the lights
+
+Installation
+```
+cd frontend
+yarn
+yarn start
+```
+
+This will start the client on `http://localhost:3000`
+
+If you need to change the IP and Port of the graphql server, it is done in `./frontend/src/App.js`
