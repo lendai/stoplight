@@ -5,6 +5,15 @@ import { ApolloProvider } from "react-apollo";
 import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
+const secondsToString = seconds => {
+  const minutes = Math.floor(seconds / 60)
+  const secLeft = seconds % 60
+
+  if (minutes > 0) return `${minutes}m ${secLeft}s`
+
+  return `${secLeft}s`
+}
+
 const client = new ApolloClient({
   uri: "http://localhost:8981/"
 })
@@ -44,7 +53,7 @@ const LightStatus = props => (
       if (error) return <p>Error :(</p>;
             
       return (
-        <div style={{ textAlign: 'left', maxWidth: '400px', margin: '0 auto' }}>
+        <div className="container" style={{ maxWidth: '400px', textAlign: 'left' }}>
           <h3>Light status</h3>
 
           <p>
@@ -56,12 +65,12 @@ const LightStatus = props => (
             <OnOrOff isOn={data.greenLightOn} />
           </p>
 
-          <p>Time until green: {data.timeUntilGreen}</p>
+          <p>Time until green: {secondsToString(data.timeUntilGreen)}</p>
           <br />
           <br />
-          <button onClick={props.onTurnGreen}>Turn green NOW</button>
+          <button disabled={data.greenLightOn} type="button" className="btn btn-success btn-block" onClick={props.onTurnGreen}>Turn green NOW</button>
           <br />
-          <button onClick={props.onReset}>Reset countdown</button>
+          <button type="button" className="btn btn-primary btn-block" onClick={props.onReset}>Reset countdown</button>
         </div>
       )
     }}

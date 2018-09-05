@@ -1,8 +1,9 @@
 const { GraphQLServer } = require('graphql-yoga')
 const lights = require('./lights')
 const randomInt = require('random-int');
-const minWait = 3
-const maxWait = 10
+
+const minWait = 5 * 60
+const maxWait = 15 * 60
 
 const getTimeout = () => randomInt(minWait, maxWait)
 
